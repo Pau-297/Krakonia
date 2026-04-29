@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html lang="es-KRK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏛️ Krakonia - República Digital Soberana</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #FFD700;
+            --dark: #1a0a2e;
+            --darker: #0d0517;
+            --red: #8B0000;
+            --white: #F5F0E8;
+            --green: #2F4F2F;
+            --blue: #1B3A5C;
+            --cream: #F5F0E8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Crimson Text', 'Georgia', serif;
+            background: linear-gradient(135deg, var(--dark) 0%, #2d1b4e 50%, var(--dark) 100%);
+            min-height: 100vh;
+            color: var(--white);
+        }
+
+        /* ========== LOGIN SCREEN ========== */
+        .login-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .login-box {
+            background: rgba(0,0,0,0.5);
+            border: 2px solid var(--gold);
+            border-radius: 15px;
+            padding: 35px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 0 30px rgba(255,215,0,0.2);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .login-header .logo {
+            font-size: 3.5rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%,100% { text-shadow: 0 0 20px rgba(255,215,0,0.4); }
+            50% { text-shadow: 0 0 40px rgba(255,215,0,0.8); }
+        }
+
+        .login-header h1 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 2rem;
+            margin: 10px 0;
+            letter-spacing: 3px;
+        }
+
+        .login-header p {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px 8px;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--gold);
+            color: #ccc;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            border-radius: 8px 8px 0 0;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .tab-btn.active {
+            background: var(--gold);
+            color: var(--dark);
+            font-weight: bold;
+            box-shadow: 0 -5px 20px rgba(255,215,0,0.3);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--gold);
+            border-radius: 0 0 12px 12px;
+            padding: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 11px 14px;
+            background: rgba(0,0,0,0.6);
+            border: 1px solid var(--gold);
+            border-radius: 8px;
+            color: #fff;
+            font-family: 'Crimson Text', serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #FFA500;
+            box-shadow: 0 0 15px rgba(255,215,0,0.2);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            margin: 4px 0;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--dark);
+        }
+
+        .btn-primary:hover {
+            background: #FFA500;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255,215,0,0.3);
+        }
+
+        .btn-sm {
+            width: auto;
+            padding: 7px 15px;
+            font-size: 0.7rem;
+            display: inline-block;
+        }
+
+        .btn-success { background: var(--green); color: white; }
+        .btn-success:hover { background: #3a6b3a; }
+        .btn-danger { background: var(--red); color: white; }
+        .btn-danger:hover { background: #a00000; }
+
+        .alert {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 18px;
+            font-size: 0.9rem;
+        }
+
+        .alert-error {
+            background: rgba(139,0,0,0.3);
+            border: 1px solid var(--red);
+            color: #ff6b6b;
+        }
+
+        .alert-success {
+            background: rgba(47,79,47,0.3);
+            border: 1px solid var(--green);
+            color: #7fff7f;
+        }
+
+        .alert-info {
+            background: rgba(27,58,92,0.3);
+            border: 1px solid var(--blue);
+            color: #87CEEB;
+        }
+
+        .badge {
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            display: inline-block;
+        }
+
+        .badge-gold { background: #FFD700; color: #1a0a2e; }
+        .badge-green { background: #2F4F2F; color: #7fff7f; }
+        .badge-red { background: #8B0000; color: #ff6b6b; }
+        .badge-blue { background: #1B3A5C; color: #87CEEB; }
+        .badge-orange { background: #FF8C00; color: white; }
+
+        .hidden { display: none !important; }
+
+        /* ========== PANEL DE GOBIERNO ========== */
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: var(--darker);
+            border-right: 2px solid var(--gold);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255,215,0,0.2);
+            margin-bottom: 20px;
+        }
+
+        .sidebar-logo {
+            font-size: 2.5rem;
+            color: var(--gold);
+        }
+
+        .sidebar-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1rem;
+            margin-top: 8px;
+        }
+
+        .sidebar-subtitle {
+            font-size: 0.7rem;
+            color: #aaa;
+        }
+
+        .nav-menu {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            overflow-y: auto;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            background: transparent;
+            border: 1px solid transparent;
+            color: #ccc;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            text-align: left;
+            width: 100%;
+        }
+
+        .nav-item:hover {
+            background: rgba(255,215,0,0.1);
+            border-color: var(--gold);
+        }
+
+        .nav-item.active {
+            background: var(--gold);
+            color: var(--dark);
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(255,215,0,0.3);
+        }
+
+        .nav-icon {
+            font-size: 1.1rem;
+            width: 25px;
+            text-align: center;
+        }
+
+        .sidebar-footer {
+            border-top: 1px solid rgba(255,215,0,0.2);
+            padding-top: 15px;
+            margin-top: auto;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: rgba(255,215,0,0.1);
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .user-avatar {
+            width: 38px;
+            height: 38px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: var(--dark);
+            font-weight: bold;
+        }
+
+        .user-details {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .user-name {
+            font-weight: bold;
+            color: var(--gold);
+            font-size: 0.8rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .user-role {
+            font-size: 0.65rem;
+            color: #aaa;
+        }
+
+        .user-balance {
+            font-size: 0.7rem;
+            color: #7fff7f;
+            margin-top: 2px;
+        }
+
+        .btn-logout {
+            width: 100%;
+            padding: 9px;
+            background: transparent;
+            border: 1px solid var(--red);
+            color: var(--red);
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-logout:hover {
+            background: var(--red);
+            color: white;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: 260px;
+            padding: 25px;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding: 18px 22px;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--gold);
+            border-radius: 10px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .top-bar-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.3rem;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .dash-card {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--gold);
+            border-radius: 10px;
+            padding: 22px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dash-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(255,215,0,0.2);
+        }
+
+        .dash-card .icon {
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+        }
+
+        .dash-card .title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .dash-card .value {
+            font-size: 1.8rem;
+            color: var(--cream);
+            font-weight: bold;
+        }
+
+        .dash-card .desc {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 8px;
+        }
+
+        .action-bar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 22px;
+            flex-wrap: wrap;
+        }
+
+        .table-container {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--gold);
+            border-radius: 10px;
+            padding: 20px;
+            overflow-x: auto;
+            margin-bottom: 22px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            padding: 12px;
+            text-align: left;
+            border-bottom: 2px solid var(--gold);
+            font-size: 0.8rem;
+        }
+
+        td {
+            padding: 11px 12px;
+            border-bottom: 1px solid rgba(255,215,0,0.1);
+            color: var(--cream);
+            font-size: 0.9rem;
+        }
+
+        tr:hover {
+            background: rgba(255,215,0,0.04);
+        }
+
+        /* ========== VOTACIONES ========== */
+        .votacion-card {
+            background: rgba(0,0,0,0.5);
+            border: 2px solid var(--gold);
+            border-radius: 10px;
+            padding: 22px;
+            margin-bottom: 18px;
+        }
+
+        .votacion-titulo {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+
+        .votacion-contenido {
+            color: var(--cream);
+            line-height: 1.6;
+            margin-bottom: 18px;
+            padding: 14px;
+            background: rgba(0,0,0,0.3);
+            border-left: 3px solid var(--gold);
+        }
+
+        .votacion-botones {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-voto {
+            flex: 1;
+            min-width: 140px;
+            padding: 13px;
+            font-size: 0.95rem;
+            font-weight: bold;
+        }
+
+        .btn-favor {
+            background: var(--green);
+            color: white;
+        }
+
+        .btn-favor:hover {
+            background: #3a6b3a;
+            transform: translateY(-2px);
+        }
+
+        .btn-contra {
+            background: var(--red);
+            color: white;
+        }
+
+        .btn-contra:hover {
+            background: #a00000;
+            transform: translateY(-2px);
+        }
+
+        .btn-abstencion {
+            background: #555;
+            color: white;
+        }
+
+        .btn-abstencion:hover {
+            background: #777;
+            transform: translateY(-2px);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 22px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid var(--gold);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 12px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--green), #7fff7f);
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .votos-detalle {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .voto-contador {
+            flex: 1;
+            text-align: center;
+            padding: 14px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            border: 1px solid rgba(255,215,0,0.2);
+        }
+
+        .voto-numero {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .voto-numero.favor { color: #7fff7f; }
+        .voto-numero.contra { color: #ff6b6b; }
+        .voto-numero.abstencion { color: #aaa; }
+
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 200;
+            background: var(--gold);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255,215,0,0.4);
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .votacion-botones {
+                flex-direction: column;
+            }
+
+            .login-box {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== PANTALLA DE LOGIN ========== -->
+    <div id="loginScreen" class="login-container">
+        <div class="login-box">
+            <div class="login-header">
+                <div class="logo">⚜️</div>
+                <h1>KRAKONIA</h1>
+                <p>República Digital Soberana | Capital: Nova Valentía</p>
+            </div>
+
+            <div id="loginMessage"></div>
+
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="login">🔐 Iniciar Sesión</button>
+                <button class="tab-btn" data-tab="registro">📝 Ciudadanía</button>
+                <button class="tab-btn" data-tab="fundar">🏛️ Fundar</button>
+            </div>
+
+            <div class="tab-content active" id="tab-login">
+                <div class="card">
+                    <form id="formLogin">
+                        <div class="form-group">
+                            <label>📧 Krako ID (Email)</label>
+                            <input type="email" id="loginEmail" placeholder="tu@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>🔐 Contraseña</label>
+                            <input type="password" id="loginPassword" placeholder="Tu contraseña" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">🛡️ ACCEDER A KRAKONIA</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="tab-content" id="tab-registro">
+                <div class="card">
+                    <div class="alert alert-info">
+                        🌍 Obtén tu <strong>Krako ID</strong> oficial y <strong>100 KKS</strong> de bienvenida.
+                    </div>
+                    <form id="formRegistro">
+                        <div class="form-group">
+                            <label>🏷️ Nombre Legal *</label>
+                            <input type="text" id="regNombre" placeholder="Tu nombre completo" required>
+                        </div>
+                        <div class="form-group">
+                            <label>📧 Correo Electrónico *</label>
+                            <input type="email" id="regEmail" placeholder="tu@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>🔐 Contraseña *</label>
+                            <input type="password" id="regPassword" placeholder="Mínimo 6 caracteres" required minlength="6">
+                        </div>
+                        <button type="submit" class="btn btn-primary">📝 SOLICITAR CIUDADANÍA</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="tab-content" id="tab-fundar">
+                <div class="card">
+                    <div class="alert alert-error">
+                        ⚠️ Solo el <strong>primer registro</strong> será el Líder Fundador.
+                    </div>
+                    <form id="formFundar">
+                        <div class="form-group">
+                            <label>🏷️ Nombre Legal del Líder *</label>
+                            <input type="text" id="fundarNombre" placeholder="Ej: Alexandros I de Krakonia" required>
+                        </div>
+                        <div class="form-group">
+                            <label>📧 Correo Electrónico Oficial *</label>
+                            <input type="email" id="fundarEmail" placeholder="lider@krakonia.gov" required>
+                        </div>
+                        <div class="form-group">
+                            <label>🔐 Contraseña del Estado *</label>
+                            <input type="password" id="fundarPassword" placeholder="Mínimo 8 caracteres" required minlength="8">
+                        </div>
+                        <button type="submit" class="btn btn-primary">🏛️ FUNDAR KRAKONIA</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== PANEL DE GOBIERNO ========== -->
+    <div id="panelScreen" class="hidden">
+        <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+
+        <div class="app-container">
+            <aside class="sidebar" id="sidebar">
+                <div class="sidebar-header">
+                    <div class="sidebar-logo">⚜️</div>
+                    <div class="sidebar-title">KRAKONIA</div>
+                    <div class="sidebar-subtitle" id="sidebarRole">Panel de Gobierno</div>
+                </div>
+
+                <nav class="nav-menu" id="navMenu"></nav>
+
+                <div class="sidebar-footer">
+                    <div class="user-info">
+                        <div class="user-avatar" id="userAvatar">L</div>
+                        <div class="user-details">
+                            <div class="user-name" id="userName">Líder</div>
+                            <div class="user-role" id="userRole">Líder Supremo</div>
+                            <div class="user-balance" id="userBalance">0 KKS</div>
+                        </div>
+                    </div>
+                    <button class="btn-logout" onclick="cerrarSesion()">🚪 Cerrar Sesión</button>
+                </div>
+            </aside>
+
+            <main class="main-content" id="mainContent">
+                <div class="top-bar">
+                    <div class="top-bar-title" id="panelTitle">🏛️ Dashboard</div>
+                </div>
+                <div id="panelContent"></div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // KRAKONIA - SISTEMA COMPLETO
+        // ============================================
+        const API = '/api';
+        let usuario = null;
+        let dbCache = null;
+
+        // ========== INICIALIZACIÓN ==========
+        document.addEventListener('DOMContentLoaded', () => {
+            setupLoginTabs();
+            setupLoginForms();
+            checkSession();
+        });
+
+        function checkSession() {
+            const s = localStorage.getItem('kr_session');
+            if (s) {
+                try {
+                    usuario = JSON.parse(s);
+                    mostrarPanel();
+                } catch (e) {
+                    localStorage.removeItem('kr_session');
+                }
+            }
+        }
+
+        // ========== TABS DE LOGIN ==========
+        function setupLoginTabs() {
+            document.querySelectorAll('#loginScreen .tab-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('#loginScreen .tab-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('#loginScreen .tab-content').forEach(c => c.classList.remove('active'));
+                    btn.classList.add('active');
+                    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+                    document.getElementById('loginMessage').innerHTML = '';
+                });
+            });
+        }
+
+        // ========== FORMULARIOS DE LOGIN ==========
+        function setupLoginForms() {
+            document.getElementById('formLogin').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+                const password = document.getElementById('loginPassword').value;
+
+                try {
+                    const r = await fetch(API + '/login', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, password })
+                    });
+                    const d = await r.json();
+
+                    if (d.exito) {
+                        usuario = d.usuario;
+                        localStorage.setItem('kr_session', JSON.stringify(d.usuario));
+                        loginMsg('✅ Bienvenido, ' + d.usuario.nombreLegal + '!', 'success');
+                        setTimeout(() => mostrarPanel(), 500);
+                    } else {
+                        loginMsg('⚠️ ' + (d.error || 'Error de conexión'), 'error');
+                    }
+                } catch (err) {
+                    loginMsg('⚠️ Error de conexión con el servidor', 'error');
+                }
+            });
+
+            document.getElementById('formRegistro').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const nombre = document.getElementById('regNombre').value.trim();
+                const email = document.getElementById('regEmail').value.trim().toLowerCase();
+                const password = document.getElementById('regPassword').value;
+
+                if (password.length < 6) {
+                    return loginMsg('⚠️ La contraseña debe tener al menos 6 caracteres', 'error');
+                }
+
+                try {
+                    const r = await fetch(API + '/registro', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ nombre, email, password })
+                    });
+                    const d = await r.json();
+
+                    if (d.exito) {
+                        usuario = d.usuario;
+                        localStorage.setItem('kr_session', JSON.stringify(d.usuario));
+                        loginMsg('🎉 ¡Ciudadanía concedida! Bienvenido a Krakonia!', 'success');
+                        setTimeout(() => mostrarPanel(), 800);
+                    } else {
+                        loginMsg('⚠️ ' + (d.error || 'Error al registrar'), 'error');
+                    }
+                } catch (err) {
+                    loginMsg('⚠️ Error de conexión con el servidor', 'error');
+                }
+            });
+
+            document.getElementById('formFundar').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const nombre = document.getElementById('fundarNombre').value.trim();
+                const email = document.getElementById('fundarEmail').value.trim().toLowerCase();
+                const password = document.getElementById('fundarPassword').value;
+
+                if (password.length < 8) {
+                    return loginMsg('⚠️ La contraseña debe tener al menos 8 caracteres', 'error');
+                }
+
+                try {
+                    const r = await fetch(API + '/fundar', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ nombre, email, password })
+                    });
+                    const d = await r.json();
+
+                    if (d.exito) {
+                        usuario = d.usuario;
+                        localStorage.setItem('kr_session', JSON.stringify(d.usuario));
+                        loginMsg('🏛️ ¡KRAKONIA HA SIDO FUNDADA! Redirigiendo...', 'success');
+                        setTimeout(() => mostrarPanel(), 1200);
+                    } else {
+                        loginMsg('⚠️ ' + (d.error || 'Error al fundar'), 'error');
+                    }
+                } catch (err) {
+                    loginMsg('⚠️ Error de conexión con el servidor', 'error');
+                }
+            });
+        }
+
+        function loginMsg(msg, tipo) {
+            document.getElementById('loginMessage').innerHTML = `<div class="alert alert-${tipo}">${msg}</div>`;
+        }
+
+        // ========== MOSTRAR PANEL ==========
+        function mostrarPanel() {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('panelScreen').classList.remove('hidden');
+
+            // Actualizar sidebar
+            document.getElementById('userName').textContent = usuario.nombreLegal;
+            document.getElementById('userRole').textContent = usuario.rol === 'lider' ? 'Líder Supremo' :
+                usuario.rol === 'consejo' ? 'Consejero' : 'Ciudadano';
+            document.getElementById('userBalance').textContent = (usuario.balance || 0) + ' KKS';
+            document.getElementById('userAvatar').textContent = usuario.nombreLegal.charAt(0).toUpperCase();
+            document.getElementById('sidebarRole').textContent = usuario.rol === 'lider' ? 'Panel de Líder' :
+                'Portal Ciudadano';
+
+            // Construir menú
+            construirMenu();
+            setupMobileMenu();
+            cambiarPanel('dashboard');
+        }
+
+        function construirMenu() {
+            const menu = document.getElementById('navMenu');
+            let items = [
+                { panel: 'dashboard', icon: '🏛️', text: 'Dashboard' },
+                { panel: 'leyes', icon: '📜', text: 'Leyes y Decretos' },
+                { panel: 'votaciones', icon: '🗳️', text: 'Votaciones' },
+                { panel: 'consejo', icon: '🏛️', text: 'Consejo' },
+                { panel: 'economia', icon: '💰', text: 'Economía' },
+                { panel: 'ciudadanos', icon: '👥', text: 'Ciudadanos' },
+                { panel: 'territorios', icon: '🗺️', text: 'Territorios' },
+                { panel: 'eventos', icon: '🎉', text: 'Eventos' },
+                { panel: 'diario', icon: '📰', text: 'Diario Oficial' }
+            ];
+
+            menu.innerHTML = items.map(item => `
+                <button class="nav-item" data-panel="${item.panel}" onclick="cambiarPanel('${item.panel}')">
+                    <span class="nav-icon">${item.icon}</span> ${item.text}
+                </button>
+            `).join('');
+        }
+
+        function setupMobileMenu() {
+            const btn = document.getElementById('mobileMenuBtn');
+            const sidebar = document.getElementById('sidebar');
+            btn.addEventListener('click', () => sidebar.classList.toggle('open'));
+            document.addEventListener('click', (e) => {
+                if (!sidebar.contains(e.target) && e.target !== btn && !e.target.closest('.nav-item')) {
+                    sidebar.classList.remove('open');
+                }
+            });
+        }
+
+        function cambiarPanel(panelName) {
+            document.querySelectorAll('#navMenu .nav-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.dataset.panel === panelName) item.classList.add('active');
+            });
+
+            document.getElementById('sidebar').classList.remove('open');
+
+            const titulos = {
+                'dashboard': '🏛️ Dashboard de Gobierno',
+                'leyes': '📜 Leyes y Decretos',
+                'votaciones': '🗳️ Sistema de Votaciones',
+                'consejo': '🏛️ Consejo de Gobierno',
+                'economia': '💰 Economía Krako',
+                'ciudadanos': '👥 Gestión de Ciudadanos',
+                'territorios': '🗺️ Territorios de Krakonia',
+                'eventos': '🎉 Eventos Nacionales',
+                'diario': '📰 Diario Oficial'
+            };
+            document.getElementById('panelTitle').textContent = titulos[panelName] || 'Panel';
+
+            loadPanel(panelName);
+        }
+
+        async function loadPanel(panelName) {
+            const content = document.getElementById('panelContent');
+            content.innerHTML = '<p style="text-align:center;color:#aaa;">Cargando...</p>';
+
+            try {
+                switch (panelName) {
+                    case 'dashboard':
+                        content.innerHTML = await getDashboardHTML();
+                        break;
+                    case 'leyes':
+                        content.innerHTML = await getLeyesHTML();
+                        break;
+                    case 'votaciones':
+                        content.innerHTML = await getVotacionesHTML();
+                        break;
+                    case 'consejo':
+                        content.innerHTML = await getConsejoHTML();
+                        break;
+                    case 'economia':
+                        content.innerHTML = await getEconomiaHTML();
+                        break;
+                    case 'ciudadanos':
+                        content.innerHTML = await getCiudadanosHTML();
+                        break;
+                    case 'territorios':
+                        content.innerHTML = getTerritoriosHTML();
+                        break;
+                    case 'eventos':
+                        content.innerHTML = await getEventosHTML();
+                        break;
+                    case 'diario':
+                        content.innerHTML = await getDiarioHTML();
+                        break;
+                    default:
+                        content.innerHTML = '<p>Panel no encontrado</p>';
+                }
+            } catch (err) {
+                content.innerHTML = '<p style="color:#ff6b6b;">Error al cargar el panel. Intente de nuevo.</p>';
+                console.error('Error cargando panel:', err);
+            }
+        }
+
+        // ========== DASHBOARD ==========
+        async function getDashboardHTML() {
+            const r = await fetch(API + '/estado');
+            const e = await r.json();
+            const leyesR = await fetch(API + '/leyes');
+            const leyes = await leyesR.json();
+            const enVotacion = leyes.filter(l => l.estado === 'en_votacion').length;
+
+            return `
+                <div class="dashboard-grid">
+                    <div class="dash-card" onclick="cambiarPanel('ciudadanos')">
+                        <div class="icon">👥</div>
+                        <div class="title">Ciudadanos</div>
+                        <div class="value">${e.poblacion || 0}</div>
+                        <div class="desc">Población total</div>
+                    </div>
+                    <div class="dash-card" onclick="cambiarPanel('leyes')">
+                        <div class="icon">📜</div>
+                        <div class="title">Leyes</div>
+                        <div class="value">${leyes.length}</div>
+                        <div class="desc">Total de leyes</div>
+                    </div>
+                    <div class="dash-card" onclick="cambiarPanel('votaciones')">
+                        <div class="icon">🗳️</div>
+                        <div class="title">En Votación</div>
+                        <div class="value">${enVotacion}</div>
+                        <div class="desc">Votaciones activas</div>
+                    </div>
+                    <div class="dash-card">
+                        <div class="icon">💰</div>
+                        <div class="title">Mi Balance</div>
+                        <div class="value">${usuario.balance || 0} KKS</div>
+                        <div class="desc">Krako disponibles</div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <h3 style="color:var(--gold);margin-bottom:12px;">⚜️ Información del Estado</h3>
+                    <p><strong>Nombre Oficial:</strong> ${e.nombre || 'República Digital de Krakonia'}</p>
+                    <p><strong>Capital:</strong> ${e.capital || 'Nova Valentía'}</p>
+                    <p><strong>Moneda:</strong> ${e.moneda || 'Krako (KKS)'}</p>
+                    <p><strong>Lema:</strong> ${e.lema || 'Unidad, Progreso, Soberanía Digital'}</p>
+                    <p><strong>Fundado:</strong> ${e.fundado ? new Date(e.fundado).toLocaleDateString('es-ES', {year:'numeric', month:'long', day:'numeric'}) : 'Pendiente de fundación'}</p>
+                    <p><strong>Reserva Nacional:</strong> ${e.reservaNacional || 0} KKS</p>
+                    <p><strong>KKS en Circulación:</strong> ${e.circulacion || 0} KKS</p>
+                </div>
+            `;
+        }
+
+        // ========== LEYES ==========
+        async function getLeyesHTML() {
+            const r = await fetch(API + '/leyes');
+            const leyes = await r.json();
+
+            if (leyes.length === 0) {
+                return `
+                    <div class="alert alert-info">No hay leyes registradas en Krakonia.</div>
+                    ${usuario.rol === 'lider' ? '<button class="btn btn-primary btn-sm" onclick="proponerLey()">📝 Proponer Primera Ley</button>' : ''}
+                `;
+            }
+
+            let html = `
+                <div class="action-bar">
+                    ${usuario.rol === 'lider' ? `
+                        <button class="btn btn-primary btn-sm" onclick="proponerLey()">📝 Proponer Ley</button>
+                        <button class="btn btn-sm" style="background:transparent;border:1px solid var(--gold);color:var(--gold);" onclick="emitirDecreto()">⚜️ Emitir Decreto</button>
+                    ` : ''}
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr><th>Título</th><th>Tipo</th><th>Estado</th><th>Autor</th><th>Fecha</th><th>Acciones</th></tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            leyes.forEach(l => {
+                let estadoClass = 'blue';
+                if (l.estado === 'aprobada' || l.estado === 'decreto') estadoClass = 'green';
+                else if (l.estado === 'rechazada') estadoClass = 'red';
+                else if (l.estado === 'en_votacion') estadoClass = 'orange';
+
+                html += `
+                    <tr>
+                        <td><strong>${l.titulo}</strong></td>
+                        <td><span class="badge badge-${l.tipo === 'decreto' ? 'gold' : 'blue'}">${l.tipo.toUpperCase()}</span></td>
+                        <td><span class="badge badge-${estadoClass}">${l.estado.replace('_', ' ').toUpperCase()}</span></td>
+                        <td>${l.autor || 'Anónimo'}</td>
+                        <td>${new Date(l.fecha).toLocaleDateString('es-ES')}</td>
+                        <td>
+                            <button class="btn btn-sm" style="background:transparent;border:1px solid var(--gold);color:var(--gold);" onclick="verLey('${l.id}')">📖 Ver</button>
+                            ${usuario.rol === 'lider' && l.estado === 'propuesta' ? `<button class="btn btn-primary btn-sm" onclick="enviarAVotacion('${l.id}')">🗳️ Votar</button>` : ''}
+                            ${usuario.rol === 'lider' && l.estado === 'en_votacion' ? `<button class="btn btn-success btn-sm" onclick="finalizarVotacion('${l.id}')">📜 Finalizar</button>` : ''}
+                        </td>
+                    </tr>
+                `;
+            });
+
+            html += '</tbody></table></div>';
+            return html;
+        }
+
+        // ========== VOTACIONES (SISTEMA COMPLETO) ==========
+        async function getVotacionesHTML() {
+            const r = await fetch(API + '/leyes');
+            const leyes = await r.json();
+            const enVotacion = leyes.filter(l => l.estado === 'en_votacion');
+            const propuestas = leyes.filter(l => l.estado === 'propuesta');
+
+            if (enVotacion.length === 0 && propuestas.length === 0) {
+                return '<div class="alert alert-info">📢 No hay leyes pendientes de votación. ¡Vuelve pronto!</div>';
+            }
+
+            let html = '';
+
+            // Leyes en votación
+            for (const ley of enVotacion) {
+                const vr = await fetch(API + '/leyes/' + ley.id + '/votos');
+                const votos = await vr.json();
+                const favor = votos.filter(v => v.voto === 'a_favor').length;
+                const contra = votos.filter(v => v.voto === 'en_contra').length;
+                const abst = votos.filter(v => v.voto === 'abstencion').length;
+                const totalVotos = votos.length;
+                const yaVoto = votos.find(v => v.usuarioId === usuario.id);
+                const puedeVotar = usuario.rol === 'lider' || usuario.rol === 'consejo';
+
+                html += `
+                    <div class="votacion-card">
+                        <div class="votacion-titulo">🗳️ ${ley.titulo} <span class="badge badge-orange">EN VOTACIÓN</span></div>
+                        <div class="votacion-contenido">${ley.contenido}</div>
+                        <p style="color:#aaa;font-size:0.85rem;">Propuesto por: <strong>${ley.autor || 'Anónimo'}</strong> | ${new Date(ley.fecha).toLocaleDateString('es-ES')}</p>
+                        
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width:${totalVotos > 0 ? Math.round((totalVotos / (dbCache?.consejoTotal + 1 || 5)) * 100) : 0}%;">
+                                ${totalVotos} votos
+                            </div>
+                        </div>
+
+                        <div class="votos-detalle">
+                            <div class="voto-contador">
+                                <div class="voto-numero favor">✅ ${favor}</div>
+                                <div style="color:#7fff7f;font-size:0.8rem;">A Favor</div>
+                            </div>
+                            <div class="voto-contador">
+                                <div class="voto-numero contra">❌ ${contra}</div>
+                                <div style="color:#ff6b6b;font-size:0.8rem;">En Contra</div>
+                            </div>
+                            <div class="voto-contador">
+                                <div class="voto-numero abstencion">⚪ ${abst}</div>
+                                <div style="color:#aaa;font-size:0.8rem;">Abstenciones</div>
+                            </div>
+                        </div>
+
+                        ${puedeVotar && !yaVoto ? `
+                            <div style="margin-top:15px;padding:14px;background:rgba(255,215,0,0.08);border-radius:8px;">
+                                <p style="color:var(--gold);margin-bottom:10px;font-weight:bold;">🗳️ Emitir mi voto:</p>
+                                <div class="votacion-botones">
+                                    <button class="btn btn-voto btn-favor" onclick="votar('${ley.id}','a_favor')">✅ A FAVOR</button>
+                                    <button class="btn btn-voto btn-contra" onclick="votar('${ley.id}','en_contra')">❌ EN CONTRA</button>
+                                    <button class="btn btn-voto btn-abstencion" onclick="votar('${ley.id}','abstencion')">⚪ ABSTENCIÓN</button>
+                                </div>
+                            </div>
+                        ` : (puedeVotar ? `
+                            <div class="alert alert-success" style="margin-top:12px;">✅ Ya has votado en esta ley. Tu voz ha sido escuchada.</div>
+                        ` : `
+                            <div class="alert alert-info" style="margin-top:12px;">👥 Solo el Líder y los miembros del Consejo pueden votar.</div>
+                        `)}
+
+                        ${usuario.rol === 'lider' ? `
+                            <div style="margin-top:12px;">
+                                <button class="btn btn-success btn-sm" onclick="finalizarVotacion('${ley.id}')">📜 Finalizar Votación</button>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }
+
+            // Leyes propuestas
+            propuestas.forEach(ley => {
+                html += `
+                    <div class="votacion-card" style="opacity:0.8;">
+                        <div class="votacion-titulo">📝 ${ley.titulo} <span class="badge badge-blue">PROPUESTA</span></div>
+                        <div class="votacion-contenido">${ley.contenido}</div>
+                        <p style="color:#aaa;">Propuesto por: <strong>${ley.autor || 'Anónimo'}</strong></p>
+                        <p style="color:var(--gold);">⏳ Esta ley está pendiente de ser enviada a votación por el Líder.</p>
+                        ${usuario.rol === 'lider' ? `<button class="btn btn-primary btn-sm" onclick="enviarAVotacion('${ley.id}')">🗳️ Enviar a Votación</button>` : ''}
+                    </div>
+                `;
+            });
+
+            return html;
+        }
+
+        // ========== CONSEJO ==========
+        async function getConsejoHTML() {
+            const r = await fetch(API + '/consejo');
+            const miembros = await r.json();
+
+            if (miembros.length === 0) {
+                return `
+                    <div class="alert alert-info">El Consejo de Gobierno aún no tiene miembros.</div>
+                    ${usuario.rol === 'lider' ? '<button class="btn btn-primary btn-sm" onclick="nombrarConsejero()">👤 Nombrar Primer Consejero</button>' : ''}
+                `;
+            }
+
+            let html = `
+                ${usuario.rol === 'lider' ? '<div class="action-bar"><button class="btn btn-primary btn-sm" onclick="nombrarConsejero()">👤 Nombrar Consejero</button></div>' : ''}
+                <div class="table-container">
+                    <table>
+                        <thead><tr><th>Nombre</th><th>Cargo</th><th>Desde</th></tr></thead>
+                        <tbody>
+            `;
+
+            miembros.forEach(m => {
+                html += `
+                    <tr>
+                        <td><strong>${m.nombre_legal || 'Desconocido'}</strong></td>
+                        <td>${m.cargo}</td>
+                        <td>${new Date(m.fecha_nombramiento).toLocaleDateString('es-ES')}</td>
+                    </tr>
+                `;
+            });
+
+            html += '</tbody></table></div>';
+            return html;
+        }
+
+        // ========== ECONOMÍA ==========
+        async function getEconomiaHTML() {
+            const er = await fetch(API + '/estado');
+            const e = await er.json();
+            const tr = await fetch(API + '/transacciones');
+            const tx = await tr.json();
+
+            let html = `
+                <div class="dashboard-grid">
+                    <div class="dash-card">
+                        <div class="icon">🏦</div>
+                        <div class="title">Reserva Nacional</div>
+                        <div class="value">${e.reservaNacional || 0} KKS</div>
+                    </div>
+                    <div class="dash-card">
+                        <div class="icon">💸</div>
+                        <div class="title">En Circulación</div>
+                        <div class="value">${e.circulacion || 0} KKS</div>
+                    </div>
+                    <div class="dash-card">
+                        <div class="icon">📈</div>
+                        <div class="title">Transacciones</div>
+                        <div class="value">${tx.length}</div>
+                    </div>
+                </div>
+            `;
+
+            if (usuario.rol === 'lider') {
+                html += '<div class="action-bar"><button class="btn btn-primary btn-sm" onclick="emitirKrako()">💎 Emitir Krako</button></div>';
+            }
+
+            html += `
+                <div class="table-container">
+                    <h3 style="color:var(--gold);margin-bottom:12px;">📊 Historial de Transacciones</h3>
+                    <table>
+                        <thead><tr><th>De</th><th>Para</th><th>Cantidad</th><th>Concepto</th><th>Fecha</th></tr></thead>
+                        <tbody>
+            `;
+
+            if (tx.length === 0) {
+                html += '<tr><td colspan="5" style="text-align:center;">No hay transacciones</td></tr>';
+            } else {
+                tx.forEach(t => {
+                    html += `
+                        <tr>
+                            <td>${t.de}</td>
+                            <td>${t.para}</td>
+                            <td><strong>${t.cantidad} KKS</strong></td>
+                            <td>${t.concepto}</td>
+                            <td>${new Date(t.fecha).toLocaleDateString('es-ES')}</td>
+                        </tr>
+                    `;
+                });
+            }
+
+            html += '</tbody></table></div>';
+            return html;
+        }
+
+        // ========== CIUDADANOS ==========
+        async function getCiudadanosHTML() {
+            const r = await fetch(API + '/ciudadanos');
+            const ciudadanos = await r.json();
+
+            let html = `
+                <div class="table-container">
+                    <table>
+                        <thead><tr><th>Krako ID</th><th>Nombre</th><th>Email</th><th>Rol</th><th>Balance</th><th>Registro</th></tr></thead>
+                        <tbody>
+            `;
+
+            if (ciudadanos.length === 0) {
+                html += '<tr><td colspan="6" style="text-align:center;">No hay ciudadanos registrados</td></tr>';
+            } else {
+                ciudadanos.forEach(c => {
+                    html += `
+                        <tr>
+                            <td style="font-size:0.75rem;">${c.krako_id}</td>
+                            <td><strong>${c.nombre_legal}</strong></td>
+                            <td>${c.email}</td>
+                            <td><span class="badge badge-${c.rol === 'lider' ? 'gold' : c.rol === 'consejo' ? 'blue' : 'green'}">${c.rol.toUpperCase()}</span></td>
+                            <td>${c.balance} KKS</td>
+                            <td>${new Date(c.fecha_registro).toLocaleDateString('es-ES')}</td>
+                        </tr>
+                    `;
+                });
+            }
+
+            html += '</tbody></table></div>';
+            return html;
+        }
+
+        // ========== TERRITORIOS ==========
+        function getTerritoriosHTML() {
+            return `
+                <div class="table-container">
+                    <h3 style="color:var(--gold);margin-bottom:12px;">🗺️ Territorios de Krakonia</h3>
+                    <table>
+                        <thead><tr><th>Nombre</th><th>Tipo</th><th>Descripción</th></tr></thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Nova Valentía</strong></td>
+                                <td><span class="badge badge-gold">CAPITAL</span></td>
+                                <td>Capital y sede del gobierno digital de Krakonia</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Valle del Krako</strong></td>
+                                <td><span class="badge badge-blue">REGIÓN</span></td>
+                                <td>Centro económico principal</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sierra Digital</strong></td>
+                                <td><span class="badge badge-blue">TERRITORIO</span></td>
+                                <td>Zona de desarrollo tecnológico e innovación</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        // ========== EVENTOS ==========
+        async function getEventosHTML() {
+            try {
+                const r = await fetch(API + '/eventos');
+                const eventos = await r.json();
+
+                let html = '';
+                if (usuario.rol === 'lider') {
+                    html += '<div class="action-bar"><button class="btn btn-primary btn-sm" onclick="crearEvento()">📅 Crear Evento</button></div>';
+                }
+
+                html += `
+                    <div class="table-container">
+                        <table>
+                            <thead><tr><th>Evento</th><th>Fecha</th><th>Lugar</th><th>Tipo</th></tr></thead>
+                            <tbody>
+                `;
+
+                if (eventos.length === 0) {
+                    html += '<tr><td colspan="4" style="text-align:center;">No hay eventos programados</td></tr>';
+                } else {
+                    eventos.forEach(e => {
+                        html += `
+                            <tr>
+                                <td><strong>${e.nombre}</strong></td>
+                                <td>${new Date(e.fecha).toLocaleString('es-ES')}</td>
+                                <td>${e.lugar || 'Nova Valentía'}</td>
+                                <td><span class="badge badge-blue">${e.tipo.toUpperCase()}</span></td>
+                            </tr>
+                        `;
+                    });
+                }
+
+                html += '</tbody></table></div>';
+                return html;
+            } catch (e) {
+                return '<div class="alert alert-info">No hay eventos programados.</div>';
+            }
+        }
+
+        // ========== DIARIO OFICIAL ==========
+        async function getDiarioHTML() {
+            const r = await fetch(API + '/diario');
+            const diario = await r.json();
+
+            let html = `
+                <div class="table-container">
+                    <table>
+                        <thead><tr><th>Fecha</th><th>Tipo</th><th>Descripción</th><th>Actor</th></tr></thead>
+                        <tbody>
+            `;
+
+            if (diario.length === 0) {
+                html += '<tr><td colspan="4" style="text-align:center;">El Diario Oficial está vacío</td></tr>';
+            } else {
+                diario.forEach(d => {
+                    html += `
+                        <tr>
+                            <td>${new Date(d.fecha).toLocaleString('es-ES')}</td>
+                            <td><span class="badge badge-gold">${d.tipo}</span></td>
+                            <td>${d.descripcion}</td>
+                            <td>${d.actor || 'Sistema'}</td>
+                        </tr>
+                    `;
+                });
+            }
+
+            html += '</tbody></table></div>';
+            return html;
+        }
+
+        // ========== ACCIONES ==========
+        async function votar(leyId, voto) {
+            try {
+                const r = await fetch(API + '/votar', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ley_id: leyId, usuario_id: usuario.id, voto })
+                });
+                const d = await r.json();
+
+                if (d.exito) {
+                    usuario.balance = (usuario.balance || 0) + 5;
+                    localStorage.setItem('kr_session', JSON.stringify(usuario));
+                    document.getElementById('userBalance').textContent = usuario.balance + ' KKS';
+                    loadPanel('votaciones');
+                    alert('✅ ¡Voto registrado! Has ganado 5 KKS por participar.');
+                } else {
+                    alert('⚠️ ' + (d.error || 'Error al votar'));
+                }
+            } catch (e) {
+                alert('⚠️ Error de conexión');
+            }
+        }
+
+        async function proponerLey() {
+            const titulo = prompt('📜 Título de la ley:');
+            if (!titulo) return;
+            const contenido = prompt('📝 Contenido de la ley:');
+            if (!contenido) return;
+            const enviarVotacion = confirm('¿Enviar directamente a votación del Consejo?');
+
+            try {
+                const r = await fetch(API + '/leyes', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ titulo, contenido, autor_id: usuario.id })
+                });
+                const d = await r.json();
+
+                if (d.exito && enviarVotacion) {
+                    await fetch(API + '/leyes/' + d.id + '/votacion', { method: 'PUT' });
+                }
+
+                loadPanel('leyes');
+                if (enviarVotacion) cambiarPanel('votaciones');
+                alert('📜 Ley propuesta exitosamente');
+            } catch (e) {
+                alert('⚠️ Error al proponer ley');
+            }
+        }
+
+        async function emitirDecreto() {
+            const numero = prompt('Número de decreto:');
+            if (!numero) return;
+            const titulo = prompt('Título del decreto:');
+            if (!titulo) return;
+            const contenido = prompt('Contenido del decreto:');
+            if (!contenido) return;
+
+            try {
+                await fetch(API + '/leyes', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        titulo: `Decreto Nº${numero}: ${titulo}`,
+                        contenido,
+                        autor_id: usuario.id
+                    })
+                });
+                loadPanel('leyes');
+                alert('⚜️ Decreto emitido con autoridad suprema');
+            } catch (e) {
+                alert('⚠️ Error al emitir decreto');
+            }
+        }
+
+        async function enviarAVotacion(leyId) {
+            try {
+                await fetch(API + '/leyes/' + leyId + '/votacion', { method: 'PUT' });
+                cambiarPanel('votaciones');
+            } catch (e) {
+                alert('⚠️ Error al enviar a votación');
+            }
+        }
+
+        async function finalizarVotacion(leyId) {
+            if (!confirm('¿Finalizar esta votación y registrar el resultado?')) return;
+
+            try {
+                const r = await fetch(API + '/leyes/' + leyId + '/finalizar', { method: 'PUT' });
+                const d = await r.json();
+                if (d.exito) {
+                    alert(d.estado === 'aprobada' ?
+                        '🎉 ¡Ley aprobada por el Consejo!' :
+                        '❌ Ley rechazada por el Consejo');
+                    loadPanel('leyes');
+                }
+            } catch (e) {
+                alert('⚠️ Error al finalizar votación');
+            }
+        }
+
+        async function nombrarConsejero() {
+            const cr = await fetch(API + '/ciudadanos');
+            const cds = await cr.json();
+            const disponibles = cds.filter(u => u.rol !== 'lider');
+
+            if (disponibles.length === 0) return alert('No hay ciudadanos disponibles');
+
+            const lista = disponibles.map((u, i) => `${i+1}. ${u.nombre_legal} (${u.rol})`).join('\n');
+            const sel = prompt('Seleccione el número del ciudadano:\n\n' + lista);
+            if (!sel) return;
+
+            const ciu = disponibles[parseInt(sel) - 1];
+            if (!ciu) return alert('Selección inválida');
+
+            const cargo = prompt('Cargo en el Consejo:', 'Consejero de Estado');
+            if (!cargo) return;
+
+            try {
+                await fetch(API + '/consejo', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ usuario_id: ciu.id, cargo })
+                });
+                loadPanel('consejo');
+                alert('👤 Consejero nombrado exitosamente');
+            } catch (e) {
+                alert('⚠️ Error al nombrar consejero');
+            }
+        }
+
+        async function emitirKrako() {
+            const cr = await fetch(API + '/ciudadanos');
+            const cds = await cr.json();
+            const lista = cds.map((u, i) => `${i+1}. ${u.nombre_legal}`).join('\n');
+            const sel = prompt('Seleccione el ciudadano:\n\n' + lista);
+            if (!sel) return;
+
+            const ciu = cds[parseInt(sel) - 1];
+            if (!ciu) return alert('Selección inválida');
+
+            const cant = parseInt(prompt('Cantidad de KKS a emitir:'));
+            if (!cant || cant <= 0) return alert('Cantidad inválida');
+
+            const concepto = prompt('Concepto de la emisión:');
+            if (!concepto) return;
+
+            try {
+                const r = await fetch(API + '/emitir', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ usuario_id: ciu.id, cantidad: cant, concepto })
+                });
+                const d = await r.json();
+                if (d.exito) {
+                    loadPanel('economia');
+                    alert(`💎 ${cant} KKS emitidos a ${ciu.nombre_legal}`);
+                } else {
+                    alert('⚠️ ' + (d.error || 'Error'));
+                }
+            } catch (e) {
+                alert('⚠️ Error de conexión');
+            }
+        }
+
+        function crearEvento() {
+            const nombre = prompt('Nombre del evento:');
+            if (!nombre) return;
+            const fecha = prompt('Fecha (YYYY-MM-DD):', new Date().toISOString().split('T')[0]);
+            if (!fecha) return;
+            const lugar = prompt('Lugar:', 'Nova Valentía');
+            if (!lugar) return;
+
+            fetch(API + '/eventos', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nombre, fecha, lugar, tipo: 'nacional' })
+            }).then(() => loadPanel('eventos')).catch(() => alert('Error'));
+        }
+
+        function verLey(id) {
+            fetch(API + '/leyes')
+                .then(r => r.json())
+                .then(leyes => {
+                    const l = leyes.find(ley => ley.id === id);
+                    if (l) {
+                        alert(`📜 ${l.titulo}\n\n${l.contenido}\n\nEstado: ${l.estado.toUpperCase()}\nAutor: ${l.autor || 'Anónimo'}\nFecha: ${new Date(l.fecha).toLocaleDateString('es-ES')}`);
+                    }
+                });
+        }
+
+        function cerrarSesion() {
+            if (confirm('¿Cerrar sesión de Krakonia?')) {
+                localStorage.removeItem('kr_session');
+                usuario = null;
+                document.getElementById('loginScreen').classList.remove('hidden');
+                document.getElementById('panelScreen').classList.add('hidden');
+                document.getElementById('loginMessage').innerHTML = '';
+                document.querySelectorAll('#loginScreen form').forEach(f => f.reset());
+            }
+        }
+    </script>
+</body>
+</html>
