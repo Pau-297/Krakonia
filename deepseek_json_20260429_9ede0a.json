@@ -1,0 +1,14 @@
+{
+  "name": "krakonia-republica-digital",
+  "version": "1.0.0",
+  "description": "República Digital de Krakonia - Backend Multiusuario",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "better-sqlite3": "^9.4.3"
+  }
+}

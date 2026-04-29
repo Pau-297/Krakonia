@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es-KRK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏛️ Krakonia - República Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #FFD700;
+            --dark: #1a0a2e;
+            --red: #8B0000;
+            --white: #F5F0E8;
+            --green: #2F4F2F;
+            --blue: #1B3A5C;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Crimson Text', 'Georgia', serif;
+            background: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 50%, #1a0a2e 100%);
+            min-height: 100vh;
+            color: #F5F0E8;
+        }
+
+        .container { max-width: 750px; margin: 0 auto; padding: 20px; }
+
+        .header {
+            text-align: center; padding: 30px 20px; margin-bottom: 25px;
+            background: rgba(0,0,0,0.4); border: 2px solid var(--gold);
+            border-radius: 15px; box-shadow: 0 0 30px rgba(255,215,0,0.2);
+        }
+
+        .header .logo { font-size: 4rem; animation: pulse 2s ease-in-out infinite; }
+        @keyframes pulse { 0%,100%{text-shadow:0 0 20px rgba(255,215,0,0.4)} 50%{text-shadow:0 0 40px rgba(255,215,0,0.8)} }
+
+        .header h1 { font-family: 'Cinzel', serif; color: var(--gold); font-size: 2.2rem; margin: 10px 0; letter-spacing: 3px; }
+        .header .subtitle { color: #ccc; font-size: 1rem; letter-spacing: 2px; }
+
+        .tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+        .tab-btn {
+            flex: 1; min-width: 120px; padding: 12px 10px; background: rgba(0,0,0,0.4);
+            border: 1px solid var(--gold); color: #ccc; cursor: pointer;
+            font-family: 'Cinzel', serif; font-size: 0.8rem; border-radius: 8px 8px 0 0;
+            transition: all 0.3s ease; text-align: center;
+        }
+        .tab-btn.active { background: var(--gold); color: #1a0a2e; font-weight: bold; box-shadow: 0 -5px 20px rgba(255,215,0,0.3); }
+
+        .tab-content { display: none; animation: fadeIn 0.4s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+        .card {
+            background: rgba(0,0,0,0.5); border: 1px solid var(--gold);
+            border-radius: 0 0 12px 12px; padding: 30px;
+        }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; color: var(--gold); font-weight: 600; font-size: 0.9rem; }
+        .form-group input {
+            width: 100%; padding: 12px 15px; background: rgba(0,0,0,0.6);
+            border: 1px solid var(--gold); border-radius: 8px; color: #fff;
+            font-family: 'Crimson Text', serif; font-size: 1rem; transition: all 0.3s ease;
+        }
+        .form-group input:focus { outline: none; border-color: #FFA500; box-shadow: 0 0 15px rgba(255,215,0,0.2); }
+
+        .btn {
+            width: 100%; padding: 14px; border: none; border-radius: 8px;
+            font-family: 'Cinzel', serif; font-size: 1rem; cursor: pointer;
+            transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 2px; font-weight: bold;
+        }
+        .btn-primary { background: var(--gold); color: #1a0a2e; }
+        .btn-primary:hover { background: #FFA500; transform: translateY(-2px); }
+        .btn-sm { width: auto; padding: 8px 18px; font-size: 0.75rem; display: inline-block; margin: 3px; }
+        .btn-success { background: var(--green); color: white; }
+        .btn-danger { background: var(--red); color: white; }
+
+        .alert { padding: 15px; border-radius: 8px; margin-bottom: 20px; font-size: 0.9rem; }
+        .alert-error { background: rgba(139,0,0,0.4); border: 1px solid #8B0000; color: #ff6b6b; }
+        .alert-success { background: rgba(47,79,47,0.4); border: 1px solid #2F4F2F; color: #7fff7f; }
+        .alert-info { background: rgba(27,58,92,0.4); border: 1px solid #1B3A5C; color: #87CEEB; }
+
+        .badge { padding: 3px 10px; border-radius: 15px; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; display: inline-block; }
+        .badge-gold { background: #FFD700; color: #1a0a2e; }
+        .badge-green { background: #2F4F2F; color: #7fff7f; }
+        .badge-blue { background: #1B3A5C; color: #87CEEB; }
+        .badge-orange { background: #FF8C00; color: white; }
+
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th { font-family: 'Cinzel', serif; color: #FFD700; padding: 12px 8px; text-align: left; border-bottom: 2px solid #FFD700; font-size: 0.8rem; }
+        td { padding: 10px 8px; border-bottom: 1px solid rgba(255,215,0,0.1); font-size: 0.9rem; }
+        tr:hover { background: rgba(255,215,0,0.05); }
+
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 20px; }
+        .stat-card {
+            background: rgba(0,0,0,0.5); border: 1px solid rgba(255,215,0,0.3);
+            border-radius: 10px; padding: 20px 15px; text-align: center; cursor: pointer; transition: all 0.3s ease;
+        }
+        .stat-card:hover { border-color: #FFD700; box-shadow: 0 5px 20px rgba(255,215,0,0.2); transform: translateY(-3px); }
+        .stat-value { font-size: 2rem; color: #FFD700; font-weight: bold; font-family: 'Cinzel', serif; }
+        .stat-label { font-size: 0.7rem; color: #aaa; margin-top: 5px; text-transform: uppercase; }
+
+        .votacion-card { background: rgba(0,0,0,0.6); border: 2px solid #FFD700; border-radius: 10px; padding: 20px; margin-bottom: 15px; }
+        .votacion-card h3 { color: #FFD700; font-family: 'Cinzel', serif; margin-bottom: 10px; }
+        .votacion-contenido { padding: 15px; background: rgba(0,0,0,0.4); border-left: 3px solid #FFD700; margin-bottom: 15px; line-height: 1.5; }
+        .votacion-botones { display: flex; gap: 10px; flex-wrap: wrap; }
+
+        .hidden { display: none !important; }
+        .footer { text-align: center; padding: 20px; margin-top: auto; color: #666; font-size: 0.8rem; border-top: 1px solid rgba(255,215,0,0.1); }
+
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.5rem; }
+            .tabs { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- PANTALLA LOGIN/REGISTRO -->
+        <div id="authScreen">
+            <div class="header">
+                <div class="logo">⚜️</div>
+                <h1>KRAKONIA</h1>
+                <p class="subtitle">República Digital Soberana</p>
+                <p style="color:#FFD700;margin-top:8px;">Capital: Nova Valentía | Moneda: Krako (KKS)</p>
+            </div>
+
+            <div id="mensaje"></div>
+
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="login">🔐 Iniciar Sesión</button>
+                <button class="tab-btn" data-tab="registro">📝 Ciudadanía</button>
+                <button class="tab-btn" data-tab="fundar">🏛️ Fundar</button>
+            </div>
+
+            <!-- Login -->
+            <div class="tab-content active" id="tab-login">
+                <div class="card">
+                    <form id="formLogin">
+                        <div class="form-group"><label>📧 Krako ID (Email)</label><input type="email" id="loginEmail" placeholder="tu@email.com" required></div>
+                        <div class="form-group"><label>🔐 Contraseña</label><input type="password" id="loginPassword" placeholder="Tu contraseña" required></div>
+                        <button type="submit" class="btn btn-primary">🛡️ ACCEDER</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Registro -->
+            <div class="tab-content" id="tab-registro">
+                <div class="card">
+                    <div class="alert alert-info">🌍 Obtén tu <strong>Krako ID</strong> y <strong>100 KKS</strong> de bienvenida.</div>
+                    <form id="formRegistro">
+                        <div class="form-group"><label>🏷️ Nombre Legal *</label><input type="text" id="regNombre" required></div>
+                        <div class="form-group"><label>📧 Correo Electrónico *</label><input type="email" id="regEmail" required></div>
+                        <div class="form-group"><label>🔐 Contraseña *</label><input type="password" id="regPassword" required minlength="6"></div>
+                        <button type="submit" class="btn btn-primary">📝 SOLICITAR CIUDADANÍA</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Fundar -->
+            <div class="tab-content" id="tab-fundar">
+                <div class="card">
+                    <div class="alert alert-info">⚠️ Solo el <strong>primer registro</strong> será el Líder Fundador.</div>
+                    <form id="formFundar">
+                        <div class="form-group"><label>🏷️ Nombre del Líder *</label><input type="text" id="fundarNombre" required></div>
+                        <div class="form-group"><label>📧 Correo Electrónico *</label><input type="email" id="fundarEmail" required></div>
+                        <div class="form-group"><label>🔐 Contraseña *</label><input type="password" id="fundarPassword" required minlength="8"></div>
+                        <button type="submit" class="btn btn-primary">🏛️ FUNDAR KRAKONIA</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL -->
+        <div id="panelScreen" class="hidden">
+            <div class="header" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;">
+                <div>
+                    <h1 style="font-size:1.3rem;">🏛️ KRAKONIA</h1>
+                    <p id="panelInfo" style="font-size:0.8rem;"></p>
+                </div>
+                <button class="btn btn-sm btn-danger" onclick="cerrarSesion()">🚪 Salir</button>
+            </div>
+
+            <div class="tabs" id="panelTabs">
+                <button class="tab-btn active" data-ptab="dashboard">🏛️ Panel</button>
+                <button class="tab-btn" data-ptab="leyes">📜 Leyes</button>
+                <button class="tab-btn" data-ptab="votaciones">🗳️ Votar</button>
+                <button class="tab-btn" data-ptab="consejo">🏛️ Consejo</button>
+            </div>
+
+            <div class="card" id="panelContent"></div>
+            <div class="footer"><p>República Digital de Krakonia | Capital: Nova Valentía</p></div>
+        </div>
+    </div>
+
+    <script>
+        const API = '/api';
+        let usuario = null;
+
+        // ========== INIT ==========
+        document.addEventListener('DOMContentLoaded', () => {
+            setupTabs('authScreen');
+            setupForms();
+            const s = localStorage.getItem('kr_session');
+            if (s) { usuario = JSON.parse(s); mostrarPanel(); }
+        });
+
+        function setupTabs(screenId) {
+            document.querySelectorAll(`#${screenId} .tab-btn`).forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const parent = btn.parentElement;
+                    parent.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const contentId = 'tab-' + btn.dataset.tab;
+                    const container = btn.closest('.container, #panelScreen');
+                    container.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    const target = document.getElementById(contentId);
+                    if (target) target.classList.add('active');
+                    document.getElementById('mensaje').innerHTML = '';
+                });
+            });
+
+            document.querySelectorAll('#panelTabs .tab-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('#panelTabs .tab-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    cargarPanel(btn.dataset.ptab);
+                });
+            });
+        }
+
+        // ========== FORMS ==========
+        function setupForms() {
+            document.getElementById('formLogin').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const res = await fetch(API + '/login', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: document.getElementById('loginEmail').value.trim().toLowerCase(), password: document.getElementById('loginPassword').value })
+                });
+                const data = await res.json();
+                if (data.exito) { usuario = data.usuario; localStorage.setItem('kr_session', JSON.stringify(data.usuario)); mostrarPanel(); }
+                else msg(data.error, 'error');
+            });
+
+            document.getElementById('formRegistro').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const res = await fetch(API + '/registro', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nombre: document.getElementById('regNombre').value.trim(), email: document.getElementById('regEmail').value.trim().toLowerCase(), password: document.getElementById('regPassword').value })
+                });
+                const data = await res.json();
+                if (data.exito) { usuario = data.usuario; localStorage.setItem('kr_session', JSON.stringify(data.usuario)); msg('🎉 ¡Ciudadanía concedida!', 'success'); setTimeout(mostrarPanel, 800); }
+                else msg(data.error, 'error');
+            });
+
+            document.getElementById('formFundar').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const res = await fetch(API + '/fundar', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nombre: document.getElementById('fundarNombre').value.trim(), email: document.getElementById('fundarEmail').value.trim().toLowerCase(), password: document.getElementById('fundarPassword').value })
+                });
+                const data = await res.json();
+                if (data.exito) { usuario = data.usuario; localStorage.setItem('kr_session', JSON.stringify(data.usuario)); msg('🏛️ ¡KRAKONIA FUNDADA!', 'success'); setTimeout(mostrarPanel, 1000); }
+                else msg(data.error, 'error');
+            });
+        }
+
+        function msg(texto, tipo) {
+            document.getElementById('mensaje').innerHTML = `<div class="alert alert-${tipo}">${texto}</div>`;
+        }
+
+        // ========== PANEL ==========
+        function mostrarPanel() {
+            document.getElementById('authScreen').classList.add('hidden');
+            document.getElementById('panelScreen').classList.remove('hidden');
+            document.getElementById('panelInfo').innerHTML = `👤 ${usuario.nombre_legal} | <span style="color:#FFD700;">${usuario.krako_id}</span> | 💰 ${usuario.balance} KKS | <span class="badge badge-${usuario.rol==='lider'?'gold':'blue'}">${usuario.rol.toUpperCase()}</span>`;
+            
+            const tabs = document.getElementById('panelTabs');
+            tabs.querySelectorAll('.lider-tab').forEach(t => t.remove());
+            if (usuario.rol === 'lider') {
+                ['ciudadanos','economia','diario'].forEach(p => {
+                    const btn = document.createElement('button');
+                    btn.className = 'tab-btn lider-tab';
+                    btn.dataset.ptab = p;
+                    btn.textContent = p === 'ciudadanos' ? '👥 Ciudadanos' : p === 'economia' ? '💰 Economía' : '📰 Diario';
+                    btn.addEventListener('click', () => {
+                        tabs.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        cargarPanel(p);
+                    });
+                    tabs.appendChild(btn);
+                });
+            }
+            cargarPanel('dashboard');
+        }
+
+        async function cargarPanel(panel) {
+            const c = document.getElementById('panelContent');
+            switch(panel) {
+                case 'dashboard': c.innerHTML = await dashboardHTML(); break;
+                case 'leyes': c.innerHTML = await leyesHTML(); break;
+                case 'votaciones': c.innerHTML = await votacionesHTML(); break;
+                case 'consejo': c.innerHTML = await consejoHTML(); break;
+                case 'ciudadanos': c.innerHTML = await ciudadanosHTML(); break;
+                case 'economia': c.innerHTML = await economiaHTML(); break;
+                case 'diario': c.innerHTML = await diarioHTML(); break;
+            }
+        }
+
+        async function dashboardHTML() {
+            const r = await fetch(API + '/estado'); const e = await r.json();
+            return `
+                <div class="dashboard-grid">
+                    <div class="stat-card"><div class="stat-value">${e.poblacion}</div><div class="stat-label">Ciudadanos</div></div>
+                    <div class="stat-card"><div class="stat-value">${e.reserva_nacional}</div><div class="stat-label">KKS Reserva</div></div>
+                    <div class="stat-card"><div class="stat-value">${e.circulacion}</div><div class="stat-label">KKS Circulando</div></div>
+                    <div class="stat-card"><div class="stat-value">${e.capital}</div><div class="stat-label">Capital</div></div>
+                </div>
+                <h3 style="color:#FFD700;">⚜️ ${e.nombre}</h3>
+                <p><strong>Lema:</strong> ${e.lema}</p>
+                <p><strong>Fundado:</strong> ${e.fundado ? new Date(e.fundado).toLocaleDateString('es-ES',{year:'numeric',month:'long',day:'numeric'}) : 'Pendiente'}</p>
+                <p><strong>Mi Balance:</strong> ${usuario.balance} KKS</p>
+            `;
+        }
+
+        async function leyesHTML() {
+            const r = await fetch(API + '/leyes'); const leyes = await r.json();
+            if (!leyes.length) return '<p>No hay leyes aún.</p>';
+            let h = '<table><thead><tr><th>Título</th><th>Estado</th><th>Autor</th></tr></thead><tbody>';
+            leyes.forEach(l => {
+                let cls = 'blue'; if (l.estado === 'aprobada' || l.estado === 'decreto') cls = 'green'; else if (l.estado === 'en_votacion') cls = 'orange';
+                h += `<tr><td><strong>${l.titulo}</strong></td><td><span class="badge badge-${cls}">${l.estado.replace('_',' ')}</span></td><td>${l.autor||'Anónimo'}</td></tr>`;
+            });
+            h += '</tbody></table>';
+            if (usuario.rol === 'lider') h += '<button class="btn btn-sm btn-primary" onclick="proponerLey()">📝 Proponer Ley</button>';
+            return h;
+        }
+
+        async function votacionesHTML() {
+            const r = await fetch(API + '/leyes'); const leyes = await r.json();
+            const ev = leyes.filter(l => l.estado === 'en_votacion');
+            if (!ev.length) return '<p>No hay votaciones activas.</p>';
+            let h = '';
+            for (const l of ev) {
+                const vr = await fetch(API + '/leyes/' + l.id + '/votos'); const votos = await vr.json();
+                const favor = votos.filter(v => v.voto === 'a_favor').length;
+                const contra = votos.filter(v => v.voto === 'en_contra').length;
+                const yaVoto = votos.find(v => v.usuario_id === usuario.id);
+                const puede = usuario.rol === 'lider' || usuario.rol === 'consejo';
+                h += `<div class="votacion-card"><h3>🗳️ ${l.titulo}</h3><div class="votacion-contenido">${l.contenido}</div><p>✅ ${favor} | ❌ ${contra}</p>`;
+                if (puede && !yaVoto) h += `<div class="votacion-botones"><button class="btn btn-sm btn-success" onclick="votar('${l.id}','a_favor')">✅ A FAVOR</button><button class="btn btn-sm btn-danger" onclick="votar('${l.id}','en_contra')">❌ EN CONTRA</button></div>`;
+                else if (yaVoto) h += '<p style="color:#7fff7f;">✅ Ya votaste</p>';
+                else h += '<p style="color:#aaa;">Solo Líder y Consejo votan</p>';
+                h += '</div>';
+            }
+            return h;
+        }
+
+        async function consejoHTML() {
+            const r = await fetch(API + '/consejo'); const m = await r.json();
+            if (!m.length) return '<p>No hay miembros del consejo.</p>';
+            let h = '<table><thead><tr><th>Nombre</th><th>Cargo</th></tr></thead><tbody>';
+            m.forEach(c => { h += `<tr><td>${c.nombre_legal}</td><td>${c.cargo}</td></tr>`; });
+            h += '</tbody></table>';
+            if (usuario.rol === 'lider') h += '<button class="btn btn-sm btn-primary" onclick="nombrarConsejero()">👤 Nombrar</button>';
+            return h;
+        }
+
+        async function ciudadanosHTML() {
+            const r = await fetch(API + '/ciudadanos'); const c = await r.json();
+            let h = '<table><thead><tr><th>Krako ID</th><th>Nombre</th><th>Rol</th><th>Balance</th></tr></thead><tbody>';
+            c.forEach(u => { h += `<tr><td style="font-size:0.7rem;">${u.krako_id}</td><td>${u.nombre_legal}</td><td><span class="badge badge-${u.rol==='lider'?'gold':'blue'}">${u.rol}</span></td><td>${u.balance} KKS</td></tr>`; });
+            h += '</tbody></table>';
+            return h;
+        }
+
+        async function economiaHTML() {
+            const tr = await fetch(API + '/transacciones'); const tx = await tr.json();
+            const er = await fetch(API + '/estado'); const es = await er.json();
+            let h = `<p><strong>Reserva:</strong> ${es.reserva_nacional} KKS | <strong>Circulación:</strong> ${es.circulacion} KKS</p>`;
+            h += '<button class="btn btn-sm btn-primary" onclick="emitirKrako()">💎 Emitir Krako</button>';
+            h += '<h4 style="color:#FFD700;margin-top:15px;">Últimas Transacciones</h4><table><thead><tr><th>De</th><th>Para</th><th>Cantidad</th></tr></thead><tbody>';
+            tx.forEach(t => { h += `<tr><td>${t.de}</td><td>${t.para}</td><td><strong>${t.cantidad} KKS</strong></td></tr>`; });
+            h += '</tbody></table>';
+            return h;
+        }
+
+        async function diarioHTML() {
+            const r = await fetch(API + '/diario'); const d = await r.json();
+            let h = '<table><thead><tr><th>Fecha</th><th>Tipo</th><th>Descripción</th></tr></thead><tbody>';
+            d.forEach(e => { h += `<tr><td>${new Date(e.fecha).toLocaleDateString('es-ES')}</td><td><span class="badge badge-gold">${e.tipo}</span></td><td>${e.descripcion}</td></tr>`; });
+            h += '</tbody></table>';
+            return h;
+        }
+
+        // ========== ACCIONES ==========
+        async function votar(leyId, voto) {
+            const r = await fetch(API + '/votar', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ley_id:leyId, usuario_id:usuario.id, voto}) });
+            const d = await r.json();
+            if (d.exito) { usuario.balance += 5; localStorage.setItem('kr_session', JSON.stringify(usuario)); cargarPanel('votaciones'); alert('✅ +5 KKS'); }
+            else alert(d.error);
+        }
+
+        async function proponerLey() {
+            const t = prompt('Título:'); if (!t) return;
+            const c = prompt('Contenido:'); if (!c) return;
+            await fetch(API + '/leyes', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({titulo:t, contenido:c, autor_id:usuario.id}) });
+            cargarPanel('leyes');
+        }
+
+        async function nombrarConsejero() {
+            const cr = await fetch(API + '/ciudadanos'); const cds = await cr.json();
+            const lista = cds.filter(u => u.rol !== 'lider').map((u,i) => `${i+1}. ${u.nombre_legal}`).join('\n');
+            if (!lista) return alert('No hay ciudadanos');
+            const sel = prompt('Número:\n' + lista); if (!sel) return;
+            const ciu = cds.filter(u => u.rol !== 'lider')[parseInt(sel)-1]; if (!ciu) return;
+            const cargo = prompt('Cargo:'); if (!cargo) return;
+            await fetch(API + '/consejo', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({usuario_id:ciu.id, cargo}) });
+            cargarPanel('consejo');
+        }
+
+        async function emitirKrako() {
+            const cr = await fetch(API + '/ciudadanos'); const cds = await cr.json();
+            const lista = cds.map((u,i) => `${i+1}. ${u.nombre_legal}`).join('\n');
+            const sel = prompt('Número:\n' + lista); if (!sel) return;
+            const ciu = cds[parseInt(sel)-1]; if (!ciu) return;
+            const cant = parseInt(prompt('Cantidad KKS:')); if (!cant || cant <= 0) return;
+            const con = prompt('Concepto:'); if (!con) return;
+            await fetch(API + '/emitir', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({usuario_id:ciu.id, cantidad:cant, concepto:con}) });
+            cargarPanel('economia');
+        }
+
+        function cerrarSesion() {
+            localStorage.removeItem('kr_session');
+            usuario = null;
+            document.getElementById('authScreen').classList.remove('hidden');
+            document.getElementById('panelScreen').classList.add('hidden');
+            document.getElementById('mensaje').innerHTML = '';
+        }
+    </script>
+</body>
+</html>
